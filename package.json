@@ -4,22 +4,42 @@
   "private": true,
   "author": "naari3 <naari.named@gmail.com>",
   "description": "emoji bbbb",
+  "scripts": {
+    "precommit": "lint-staged",
+    "postinstall": "npm run build",
+    "build": "babel src -d dist",
+    "watch": "babel -w src -d dist",
+    "start": "bin/hubot -a slack"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write",
+      "eslint",
+      "git add"
+    ]
+  },
   "dependencies": {
     "hubot": "^3.1.1",
-    "hubot-diagnostics": "^1.0.0",
     "hubot-google-images": "^0.2.7",
-    "hubot-google-translate": "^0.2.1",
     "hubot-help": "^1.0.1",
     "hubot-heroku-keepalive": "^1.0.3",
-    "hubot-maps": "0.0.3",
-    "hubot-pugme": "^0.1.1",
-    "hubot-redis-brain": "^1.0.0",
     "hubot-rules": "^1.0.0",
     "hubot-scripts": "^2.17.2",
-    "hubot-shipit": "^0.2.1",
     "hubot-slack": "^4.5.4"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "8.x.x"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.4.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2",
+    "prettier-eslint-cli": "^4.7.1"
   }
 }

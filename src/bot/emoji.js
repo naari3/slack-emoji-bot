@@ -35,13 +35,30 @@ export default async robot => {
     }
   });
 
-  robot.respond(/delete ([^ ]+)/, async res => {
+  robot.respond(/alias ([^ ]+) for ([^ ]+)/, async res => {
+    try {
+      const name = res.match[1];
+      const alias_for = res.match[1];
+
+      const result = await emojiUploader.alias(name, alias_for);
+      if (result.ok) {
+        res.send(`aliased :${name}: for :${alias_for}:`);
+      } else {
+        res.send(`failed ${result.error}`);
+      }
+    } catch (error) {
+      res.send("[*ERROR*] " + error.message);
+      robot.logger.error(error);
+    }
+  });
+
+  robot.respond(/remove ([^ ]+)/, async res => {
     try {
       const name = res.match[1];
 
-      const result = await emojiUploader.delete(name);
+      const result = await emojiUploader.remove(name);
       if (result.ok) {
-        res.send(`deleted :${name}:`);
+        res.send(`removed :${name}:`);
       } else {
         res.send(`failed ${result.error}`);
       }

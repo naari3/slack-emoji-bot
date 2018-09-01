@@ -27,6 +27,7 @@
     "hubot-rules": "^1.0.0",
     "hubot-scripts": "^2.17.2",
     "hubot-slack": "^4.5.4",
+    "sharp": "^0.20.7",
     "slack-emoji-uploader": "0.0.3"
   },
   "engines": {

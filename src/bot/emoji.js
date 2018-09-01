@@ -6,6 +6,11 @@ const { SlackEmojiUploader } = require("slack-emoji-uploader");
 const axios = require("axios");
 const { iconizedImage } = require("../lib/iconized-image");
 
+const emojiUploader = new SlackEmojiUploader(
+  process.env.SLACK_SUBDOMAIN,
+  process.env.SLACK_XOXS_TOKEN
+);
+
 export default async robot => {
   robot.respond(/create ([^ ]+) from ([^ ]+)/, async res => {
     try {
@@ -16,16 +21,27 @@ export default async robot => {
         responseType: "arraybuffer"
       });
       const image = Buffer.from(response.data);
-      const emojiUploader = new SlackEmojiUploader(
-        process.env.SLACK_SUBDOMAIN,
-        process.env.SLACK_XOXS_TOKEN
-      );
-
       const icon = await iconizedImage(image);
 
       const result = await emojiUploader.upload(name, icon);
       if (result.ok) {
         res.send(`tried :${name}:`);
+      } else {
+        res.send(`created ${result.error}`);
+      }
+    } catch (error) {
+      res.send("[*ERROR*] " + error.message);
+      robot.logger.error(error);
+    }
+  });
+
+  robot.respond(/delete ([^ ]+)/, async res => {
+    try {
+      const name = res.match[1];
+
+      const result = await emojiUploader.delete(name);
+      if (result.ok) {
+        res.send(`deleted :${name}:`);
       } else {
         res.send(`failed ${result.error}`);
       }

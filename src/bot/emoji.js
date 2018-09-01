@@ -24,7 +24,7 @@ export default async robot => {
       if (result.ok) {
         res.send(`tried :${name}:`);
       } else {
-        res.send(`failed`);
+        res.send(`failed ${result.error}`);
       }
     } catch (error) {
       res.send("[*ERROR*] " + e.message);

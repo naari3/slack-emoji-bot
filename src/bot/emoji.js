@@ -30,8 +30,8 @@ export default async robot => {
         res.send(`failed ${result.error}`);
       }
     } catch (error) {
-      res.send("[*ERROR*] " + e.message);
-      robot.logger.error(e);
+      res.send("[*ERROR*] " + error.message);
+      robot.logger.error(error);
     }
   });
 };

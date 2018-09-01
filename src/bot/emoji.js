@@ -10,16 +10,20 @@ export default async robot => {
     const name = res.match[1];
     const image_url = res.match[2];
 
-    console.log(name, image_url);
-
-    const response = await axios.get(image_url);
-    const image = new Buffer(response.data);
+    const response = await axios.get(image_url, {
+      responseType: "arraybuffer"
+    });
+    const image = Buffer.from(response.data);
     const emojiUploader = new SlackEmojiUploader(
       process.env.SLACK_SUBDOMAIN,
       process.env.SLACK_XOXS_TOKEN
     );
 
-    emojiUploader.upload(name, image);
-    res.send(`tried :${name}:`);
+    const result = await emojiUploader.upload(name, image);
+    if (result.ok) {
+      res.send(`tried :${name}:`);
+    } else {
+      res.send(`failed`);
+    }
   });
 };

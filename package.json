@@ -19,13 +19,15 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "hubot": "^3.1.1",
     "hubot-google-images": "^0.2.7",
     "hubot-help": "^1.0.1",
     "hubot-heroku-keepalive": "^1.0.3",
     "hubot-rules": "^1.0.0",
     "hubot-scripts": "^2.17.2",
-    "hubot-slack": "^4.5.4"
+    "hubot-slack": "^4.5.4",
+    "slack-emoji-uploader": "0.0.2"
   },
   "engines": {
     "node": "8.x.x"
@@ -34,7 +36,7 @@
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^5.4.0",
+    "eslint": "^5.5.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-prettier": "^2.6.2",
     "husky": "^0.14.3",

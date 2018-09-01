@@ -14,11 +14,12 @@ export default async robot => {
 
     const response = await axios.get(image_url);
     const image = new Buffer(response.data);
-    // const emojiUploader = new SlackEmojiUploader();
+    const emojiUploader = new SlackEmojiUploader(
+      process.env.SLACK_SUBDOMAIN,
+      process.env.SLACK_XOXS_TOKEN
+    );
 
-    console.log(res);
-    // emojiUploader.upload(name, image);
-
-    res.send("tried");
+    emojiUploader.upload(name, image);
+    res.send(`tried :${name}:`);
   });
 };

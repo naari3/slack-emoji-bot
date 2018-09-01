@@ -30,7 +30,7 @@
     "slack-emoji-uploader": "0.0.3"
   },
   "engines": {
-    "node": "8.x.x"
+    "node": "10.x.x"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

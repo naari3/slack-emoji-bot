@@ -1,2 +1,3 @@
 export HUBOT_SLACK_TOKEN=xoxb-dummy-dummy
-
+export SLACK_XOXS_TOKEN=xoxs-dummy-dummy
+export SLACK_SUBDOMAIN=dummy

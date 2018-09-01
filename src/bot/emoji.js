@@ -4,6 +4,7 @@
 
 const { SlackEmojiUploader } = require("slack-emoji-uploader");
 const axios = require("axios");
+const { iconizedImage } = require("../lib/iconized-image");
 
 export default async robot => {
   robot.respond(/create ([^ ]+) from ([^ ]+)/, async res => {
@@ -20,7 +21,9 @@ export default async robot => {
         process.env.SLACK_XOXS_TOKEN
       );
 
-      const result = await emojiUploader.upload(name, image);
+      const icon = await iconizedImage(image);
+
+      const result = await emojiUploader.upload(name, icon);
       if (result.ok) {
         res.send(`tried :${name}:`);
       } else {

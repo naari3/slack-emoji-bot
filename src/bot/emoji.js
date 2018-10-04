@@ -18,7 +18,8 @@ export default async robot => {
       const image_url = res.match[2];
 
       const response = await axios.get(image_url, {
-        responseType: "arraybuffer"
+        responseType: "arraybuffer",
+        maxContentLength: 1024 * 1024 * 10
       });
       const image = Buffer.from(response.data);
       const icon = await iconizedImage(image);
